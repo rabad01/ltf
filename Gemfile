@@ -12,11 +12,11 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
-gem 'mysql2'
+
 
 # gem 'compass-rails' #, '>= 1.0.alpha.0'
 # gem 'zurb-foundation'
- gem 'foundation-rails' #Zurb Foundation 5
+gem 'foundation-rails' #Zurb Foundation 5
 gem 'figaro'
 gem 'gibbon'
 gem 'high_voltage'
@@ -25,6 +25,7 @@ gem 'simple_form'
 
 
 group :development, :test do
+
   gem 'sqlite3'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -37,7 +38,15 @@ group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'web-console', '>= 3.3.0'
   gem 'better_errors'
-  gem 'rails_layout'  
+  gem 'rails_layout' 
+  gem 'mysql2'  
+end
+
+
+group :production do
+	gem 'pg'
+	#gem 'thin'
+	gem 'rails_12factor'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
