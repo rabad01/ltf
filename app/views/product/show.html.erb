@@ -1,0 +1,162 @@
+<style type="text/css">
+	label{color: white;}
+	div{text-align: center; padding-button: 10px; padding-top: 0px;}
+	body{background-image:none}
+hr {
+  border: solid #dddddd;
+  border-width: 1px 0 0;
+  clear: both;
+  margin: 5px 0px 5px 0px;
+  height: 0;
+}
+
+.alert{background-color: #33811f; color: white; font-size: 20px;}
+
+</style>
+
+</br>
+</br>
+
+<ul style="text-align: right;" class="small-block-grid-1 medium-block-grid-1 large-block-grid-1" id="message_show">
+	<li>
+		<%= render 'layouts/messages' %>
+	</li>
+</ul>	
+
+<% session[:Prod_id] = @Product_show.id %>
+
+	<section class="section_light" style=" padding-left: 20px; 
+		padding-top: 30px;
+		padding-right: 20px;
+		padding-bottom: 20px;
+		border-style: double;">
+		 
+		<ul class="small-block-grid-1 medium-block-grid-2 large-block-grid-2" id="product_show">
+
+			<li>
+			<ul class="pricing-table" style="padding-left: 20px; padding-right: 20px;">
+					<h4 style="text-align: Center"><%=@Product_show.name %></h4>
+					<p style="text-align: Center"><%=@Product_show.dosage.to_s+' '+@Product_show.metric %></p>
+					<hr>
+					<ul class="small-block-grid-1 medium-block-grid-1 large-block-grid-1" style="text-align: center">  
+						<li > 
+							<%=@Product_show.lab.name+' |' %>
+							<%=@Product_show.active_ingredient.description+' -' %>
+						 		
+							<% if @Product_show.active_ingredient.under_insurance %>
+								<span class="label">En Seguro</span>
+							<% else %>
+								<span class="label" style= "background-color: #ee2222">No Asegurado</span>
+							<% end %>
+						</li>
+					</ul>
+					<p style="text-align: Center">
+					<%=image_tag('product/'<<@Product_show.picture_file_name, border: 0, align: "center", :height => "300", :width => "250")%></p>
+					
+					<% if @Product_show.receipt_required %>
+						<p style="text-align: Center">
+							<span class="label" style= "background-color: #ee2222">Medicamento requiere receta</span>
+						</p>
+					<% end %>
+				<li class="bullet-item">
+					<%=@Product_show.description%>
+				</li>
+			</ul>
+			</li>
+			<li>
+				<% if @DrugStorePrice.present? %>
+			
+					<h5>Selecciona tu farmacia</h5>
+					<hr>
+					</br>
+					<ul class="pricing-table" style="padding-left: 20px; padding-right: 20px; padding-top: 20px;">
+					<% @DrugStorePrice.each do |ds| %>
+						<div class="row">
+						
+							<div class="large-3 columns">
+								<%=image_tag('drugstore/'<<ds.drug_store.logo_file_name, border: 0, :height => "300", :width => "200")%>
+							</div>
+							<div class="large-9 columns" style="text-align: Left">
+								<div class="row" style="padding-button: 40px;">
+									<div class="large-6 medium-6 small-6 columns" style="text-align: Left">
+										<%=ds.drug_store.name%>
+									</div>	
+									<div class="large-6  medium-6 small-6 columns" style="text-align: Right">
+										<%= 'RD$ '+ sprintf('%05.2f', ds.price)%>
+									</div>
+									
+								</div>
+								<hr>
+								<div class="row" style="padding-button: 40px;">
+									<div class="large-9 medium-9 small-8 columns" style="text-align: Left">
+										
+										
+									
+										<% if (ds.drug_store.drug_ars.size == 0) or (ds.drug_store.drug_ars.nil?)%>
+											<span data-tooltip aria-haspopup="true" class="has-tip" title="No acepta seguro medico.">
+												<%=image_tag('icon/ars.png', border: 0, :height => "20", :width => "30")%>
+											</span>
+										<% else %>
+
+											<a data-dropdown= <%= ds.drug_store.name.delete(' ') %>  data-options="is_hover:true; hover_timeout:5000">ARS</a>
+
+											<ul id=<%= ds.drug_store.name.delete(' ') %> class="f-dropdown" data-dropdown-content>
+											  <li><strong>Se aceptan los seguros:</strong></li>
+												<hr>
+												<% @drug_ars = ds.drug_store.drug_ars %>
+												<% @drug_ars.each do |da| %>
+													<li><%= da.ar.name %></li>
+												<% end %>
+											</ul>
+
+										<% end %>
+										
+										<% if ds.drug_store.cash_acepted %>
+										<span data-tooltip aria-haspopup="true" class="has-tip" title="Se acepta efectivo.">
+											<%=image_tag('icon/cash.png', border: 0, :height => "20", :width => "30")%>
+										</span>
+										<% end %>
+										<% if ds.drug_store.card_acepted %>
+										<span data-tooltip aria-haspopup="true" class="has-tip" title="Se acepta tarjeta.">
+											<%=image_tag('icon/creditcard01.png', border: 0, :height => "20", :width => "30")%>
+										</span>
+										<% end %>
+										
+										
+									</div>	
+									<div class="large-3  medium-3 small-4 columns" style="text-align: Right">
+										<span data-tooltip aria-haspopup="true" class="has-tip" title="Agregar al carrito de compras">
+										
+											<%= form_for @order_item, :url => {:action=>"create", :controller => 'order_item'} do |f| %>
+												<%= f.hidden_field  :product_id, :value => @Product_show.id %>
+												<%= f.hidden_field  :drug_store_id, :value => ds.drug_store_id %>
+												<%= f.hidden_field  :quantity, :value => 1 %>
+												<%= f.hidden_field  :unit_price, :value => ds.price %>
+												<%= f.hidden_field  :payment_method_id, value:  1 %>
+												<%= f.hidden_field  :comment, value: "" %>
+												<%= f.hidden_field  :order_item_status_id, value: 1 %>
+												<%= f.hidden_field  :use_insurance, value: false %>
+												<input class="image-submit" type="image" src="/assets/Icon_cart_add03.png" style="height: 50px; width: 50px"/>
+																					
+											<% end %>
+
+										</span>
+									</div>
+									
+								</div>
+							</div>
+						</div>
+						
+						<hr>
+					
+					<% end %>
+					</ul>
+				<% else %>
+					<h5 style="color: red">Este producto no esta disponible en el sector seleccionado</h5>
+					<hr style="border: solid red">
+				<% end %>
+				
+			</li>
+		</ul>
+	</section> 
+

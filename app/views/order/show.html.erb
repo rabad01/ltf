@@ -1,0 +1,191 @@
+<style type="text/css">
+	label{color: black;}
+	div{text-align: center; padding-button: 0px;}
+	body{background-image:none}
+
+hr {
+  border: solid #dddddd;
+  border-width: 1px 0 0;
+  clear: both;
+  margin: 5px 0px 5px 0px;
+  height: 0;
+}
+
+.alert{background-color: #33811f; color: white; font-size: 20px;}
+
+a{color: red}
+
+</style>	
+
+</br>
+</br>
+
+<ul style="text-align: right;" class="small-block-grid-1 medium-block-grid-1 large-block-grid-1" id="message_show">
+	<li>
+		<%= render 'layouts/messages' %>
+	</li>
+</ul>
+
+</br>
+</br>
+</br>
+</br>	
+<% if (@order_items.nil?) or (@order_items.size == 0) %>
+
+	<p class="text-center">
+		No hay medicamentos seleccionados aun.  Por favor, <%= link_to "vaya a la busqueda", action: 'index', controller: 'product', :search => session[:prod_search]%> y agregue los medicamentos de su preferencia. (Gracias!!!)
+	</p>
+	</br>
+	</br>
+	  <p class="text-center">
+		Si necesita ayuda no dude en contactarnos al (XXX) XXX XXXX, y con gusto le atenderemos...
+	  </p>
+
+	</br>
+	</br>
+	</br>
+	</br>
+	</br>
+  
+<% else %>
+<div class="row" style="text-align: left">
+	<div class="medium-12 columns" style="text-align: left">
+		<h2><%= @order_items.size %> Productos en tu carrito. </h2>
+	</div>
+</div>
+</br>
+<div class="row">
+  <div class="medium-8 columns" style="text-align: left">
+	
+	<% @Drug_distinct.each do |dd| %>
+		<ul class="pricing-table">
+			<li class="bullet-item">
+				<ul class="small-block-grid-2 medium-block-grid-2 large-block-grid-2">  
+					<li > 
+						<div class="row">
+							<div class="medium-3 columns" style="text-align: left">
+								<%=image_tag('drugstore/'<<dd.drug_store.logo_file_name, border: 0, :height => "50", :width => "50")%>
+							</div>
+							<div class="medium-9 columns" style="text-align: left">
+								<h5><%= dd.drug_store.name %></h5>
+							</div>
+						</div>					
+						
+					</li>
+					<li style="text-align: right"> 
+						<h5><%= 'Total: RD$ '+sprintf('%05.2f', dd.total).reverse.scan(/(\d*\.\d{1,3}|\d{1,3})/).join(',').reverse%></h5>
+					</li>
+
+				</ul>
+				
+			</li>
+			<li class="price" style="font-size: 15px">
+				<% @Prod_detail = @order_items.where(drug_store_id: dd.drug_store_id) %>
+				
+				<% @Prod_detail.each do |pd| %>
+					<ul class="small-block-grid-1 medium-block-grid-1 large-block-grid-3">
+						<li>
+							<%=image_tag('product/'<<pd.product.picture_file_name, border: 0, align: "center", :height => "300", :width => "250")%>
+							<strong><%= pd.product.name%></strong>
+							<p style="text-align: Center; font-size: 10px">
+							<%=pd.product.dosage.to_s+' '+pd.product.metric %> 
+							<br>
+							<strong style="font-size: 15px"><%= sprintf('%05.2f',pd.unit_price).reverse.scan(/(\d*\.\d{1,3}|\d{1,3})/).join(',').reverse%></strong>
+							
+							</p>
+						</li>
+						<li>
+							<strong>Cantidad?</strong>
+							<br>
+							<br>
+							<%= simple_form_for pd do |f| %>
+								<%= f.input :quantity, label: false%>
+								<%= f.button :submit, 'Actualizar', class: "button expand" %>
+							<% end %>
+								<strong">
+									<%= link_to 'Eliminar', {controller: 'order_item', action: 'destroy', :id => pd.id}, method: :delete, data: {confirm: "Seguro que quieres eliminar este articulo de tu carrito?"} %>
+								</strong>
+						</li>
+						<li>
+							<strong> <%= 'RD$ '+sprintf('%05.2f', pd.total).reverse.scan(/(\d*\.\d{1,3}|\d{1,3})/).join(',').reverse%>
+							</strong>
+							<br>
+							<br>
+							<br>
+							<strong>Forma de Pago?</strong>
+							<br>
+							<%= simple_form_for pd, remote: true do |f| %>
+								<%=f.collection_radio_buttons :payment_method_id, 
+								(if pd.drug_store.cash_acepted and pd.drug_store.card_acepted 
+									[[1, 'Efectivo'],[2,'Tarjeta']]
+								else
+									if pd.drug_store.cash_acepted
+										[[1, 'Efectivo']]
+									else
+										[[2,'Tarjeta']]
+									end
+								end),
+								
+								:first, :last, checked: pd.payment_method_id, 
+								:onclick => '$(this).trigger("submit.rails")' %>
+								
+								<%= f.button :submit, style: "display: none;" %>
+							<% end %>							
+							
+							<br>
+							
+								<% if !pd.product.active_ingredient.under_insurance %>
+									<span class="label" style= "background-color: #ee2222">Producto no asegurado.</span>
+								<% else %>
+									<% if pd.drug_store.drug_ars.size == 0 %>
+										<span class="label" style= "background-color: #ee2222">Farmacia no acepta seguro.</span>
+									<% else %>
+										<%= simple_form_for pd, remote: true do |f| %>
+										<%= f.input :use_insurance, :label => 'Usar seguro?', :value => pd.use_insurance %>
+								
+										<%= f.button :submit, style: "display: none;" %>
+										<% end %>
+									<% end %>
+								<% end %>
+							
+
+							
+						</li>
+
+					</ul>
+					<hr>
+
+				<% end %>	
+			</li>
+			
+		</ul>		
+
+	<% end %>
+  </div>
+  <div class="medium-4 columns" style="text-align: left">
+	<ul class="pricing-table" style="padding-left: 20px; padding-right: 20px; padding-top: 20px; text-align: center;">
+		<ul class="small-block-grid-2 medium-block-grid-2 large-block-grid-2" style="text-align: left">
+			<li style="width: 25%">
+			<%=image_tag('icon/Closeorder.png', border: 0, align: "center", :height => "50", :width => "50")%> 
+			</li>
+			<li style="width: 75%">
+			<h5>FINALIZAR ORDEN</h5>
+			</li>
+		</ul>
+		
+		<hr>
+		</br>
+		<h5> <%='Monto a Pagar : RD$ '+ sprintf('%05.2f', current_order.order_items.sum(:total)).reverse.scan(/(\d*\.\d{1,3}|\d{1,3})/).join(',').reverse%></h5> 
+		</br>
+		<hr>
+		</br>
+		<a href="#" class="button radius">Procesar Orden</a>
+	</ul>
+  </div>
+</div>	
+
+</br>
+</br>
+  
+<% end %>
+

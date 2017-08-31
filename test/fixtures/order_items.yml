@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  order: one
+  product: one
+  drug_store: one
+  payment_method: one
+  quantity: 9.99
+  unit_price: 9.99
+  total: 9.99
+  comment: MyText
+  order_item_status: one
+
+two:
+  order: two
+  product: two
+  drug_store: two
+  payment_method: two
+  quantity: 9.99
+  unit_price: 9.99
+  total: 9.99
+  comment: MyText
+  order_item_status: two

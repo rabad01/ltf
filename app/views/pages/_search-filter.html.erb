@@ -1,0 +1,33 @@
+
+<section class="section_light" style="background-color: #2b7fd8; 
+    padding-top: 30px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+    padding-left: 20px;">
+
+<%= form_tag({action: 'index', controller: 'product'}, :method => "get", id: "search-form") do %>
+  <div class="row">
+    <div class="medium-4 columns">
+      <label >Producto
+        <%= text_field_tag :search, params[:search], placeholder: "Buscar Medicamentos...", :autofocus=>true%>
+      </label>
+    </div>
+    <div class="medium-4 columns">
+      <label>Provincia
+		<%=select_tag "province",options_for_select(provinces_all.collect{ |p| [p.name, p.id] }) %>
+      </label>
+    </div>
+	    <div class="medium-4 columns">
+      <label>Sector
+		<%=select_tag "location", options_for_select(location_all.collect{ |p| [p.name, p.id.to_s] }) %>
+		
+      </label>
+    </div>
+  </div>
+  </br>
+    <div class="row">
+		<input type="submit" class="button round" value="Buscar" style="color: white; background-color: #FF8000">
+	</div>
+<% end %>
+
+</section>

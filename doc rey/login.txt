@@ -1,0 +1,22 @@
+<section class="section_light">
+    <div class="row">
+        <div class="four columns">
+          <div class="signup-panel">
+            <h4 class="welcome">Login</h4>
+            <form data-abide method="post" action="connection" id="form_login">
+              <div class="row collapse">
+                <div class="small-12  columns">
+                  <input name="username" type="text" placeholder="Username" required>
+                </div>
+              </div>
+              <div class="row collapse">
+                <div class="small-12 columns ">
+                  <input name="password" type="password" placeholder="Password" required>
+                </div>
+            </div>
+            <input type="submit" class="round button" value="Login"/>
+        </form>
+      </div>
+    </div>
+   </div>
+</section>

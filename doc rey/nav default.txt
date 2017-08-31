@@ -1,0 +1,20 @@
+
+<nav class="top-bar" data-topbar style="background-color: white; border-bottom: solid 1px">
+  <ul class="title-area">
+    <li class="name" style="width: 100px">
+		<i class="foundicon-home"></i>
+		<%= link_to image_tag("icon/Home03.png", border: 0, width: '40px'), {action: 'home', controller: 'pages'}%>
+		<%# link_to 'Inicio', root_path %>
+	</li>
+	<li class="divider"></li>
+    <li class="toggle-topbar menu-icon">
+		<a href="#">Menu</a>
+	</li>
+  </ul>
+  <div class="top-bar-section">
+    <ul>
+      <%= render 'layouts/navigation_links' %>
+    </ul>
+  </div>
+</nav>
+

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  product: one
+  drug_store: one
+  price: 9.99
+  active: false
+
+two:
+  product: two
+  drug_store: two
+  price: 9.99
+  active: false

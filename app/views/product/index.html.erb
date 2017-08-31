@@ -1,0 +1,74 @@
+<style type="text/css">
+	label{color: white;}
+	div{text-align: center}
+	body{background-image:none}
+	
+</style>
+
+</br>
+</br>
+<% session[:prod_search] = @search %>
+
+
+<% if @Product.present? %>
+	
+	<section class="row" style=" margin: auto;">
+		<p style="color: black; font-size: medium;"> <h4> Selecciona tu medicamento:</h4></p>
+	</section> 
+
+	<section class="section_light" style=" padding-left: 20px; 
+		padding-top: 30px;
+		padding-right: 20px;
+		padding-bottom: 20px;
+		border-style: double;">
+  
+		<ul class="small-block-grid-1 medium-block-grid-2 large-block-grid-4" id="products">
+			<% @Product.each do |p| %>
+						<li>
+							<%= link_to action: 'show', :id => p.id, :location_id => session[:loc_search] do %>
+							<ul class="pricing-table">
+								<h6 style="text-align: Right">Continuar >></h6>
+							
+								<li class="title"><%=p.name %></li>
+								<li class="bullet-item">
+								<%=image_tag('product/'<<p.picture_file_name, border: 0, :height => "300", :width => "250")%>
+								</li>
+								<li class="bullet-item">
+									<ul class="small-block-grid-2 medium-block-grid-2 large-block-grid-2" style="text-align: left">  
+										<li style="width: 70%"> <%=p.dosage.to_s+' '+p.metric %></li>
+										<li style="width: 30%"> <%=p.lab.name %></li>
+									</ul>
+								</li>
+								<li class="bullet-item">
+									<%=p.active_ingredient.description%>  
+									<% if p.active_ingredient.under_insurance %>
+										<span class="label">En Seguro</span>
+									<% else %>
+										<span class="label" style= "background-color: #ee2222">No 
+										Asegurado</span>
+										
+									<% end %>
+								</li>						
+							</ul>
+							<% end %>
+						</li>
+					
+				
+			<%end%>
+		</ul>
+	</section> 
+	
+<% else %>
+
+	<section class="section_light" style="background-color: #ccd2be; 
+		padding-top: 30px;
+		padding-right: 20px;
+		padding-bottom: 20px;
+		padding-left: 20px;">
+	  <div class="row">
+		<p style="color: red"> <strong> No hay medicamentos con la descripcion <%= params[:search] %> . 
+		</strong></p>
+		
+	  </div>	
+	</section>  
+<% end %>

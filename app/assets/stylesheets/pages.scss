@@ -1,0 +1,25 @@
+// Place all the styles related to the pages controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+body{
+    background-image: url("background-home.jpg");
+
+	background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: 0 -10px;
+    background-size: cover;
+    height: 100% !important;
+    width: 100% !important;
+    z-index: -10;
+    //position: fixed;
+    top: 0;
+	background-color: transparent;
+
+}
+
+
+
+
+

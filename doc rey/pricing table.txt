@@ -1,0 +1,33 @@
+<ul class="pricing-table">
+  <li class="title">Standard</li>
+  <li class="price">$99.99</li>
+  <li class="description">An awesome description</li>
+  <li class="bullet-item">1 Database</li>
+  <li class="bullet-item">5GB Storage</li>
+  <li class="bullet-item">20 Users</li>
+  <li class="cta-button"><a class="button" href="#">Buy Now</a></li>
+</ul>
+
+
+<ul class="small-block-grid-2">
+  <li><img src="../img/demos/demo1.png"></li>
+  <li><img src="../img/demos/demo2.png"></li>
+  <li><img src="../img/demos/demo3.png"></li>
+  <li><img src="../img/demos/demo4.png"></li>
+</ul>
+
+<!-- Using only the large-block-grid -->
+<ul class="large-block-grid-4">
+  <li><img src="../img/demos/demo1.png"></li>
+  <li><img src="../img/demos/demo2.png"></li>
+  <li><img src="../img/demos/demo3.png"></li>
+  <li><img src="../img/demos/demo4.png"></li>
+</ul>
+
+<!-- Using both block grids together for different layouts -->
+<ul class="small-block-grid-2 large-block-grid-4">
+  <li><img src="../img/demos/demo1.png"></li>
+  <li><img src="../img/demos/demo2.png"></li>
+  <li><img src="../img/demos/demo3.png"></li>
+  <li><img src="../img/demos/demo4.png"></li>
+</ul>	

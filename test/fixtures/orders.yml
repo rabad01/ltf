@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  order_status: one
+  total_insured: 9.99
+  total_not_insured: 9.99
+  total_order: 9.99
+  comment: MyText
+
+two:
+  user: two
+  order_status: two
+  total_insured: 9.99
+  total_not_insured: 9.99
+  total_order: 9.99
+  comment: MyText
