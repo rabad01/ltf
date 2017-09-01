@@ -4,7 +4,7 @@ delete from countries
 select *
 from countries
 
--- insert into countries(name, created_at, updated_at)
+insert into countries(name, created_at, updated_at)
 values('Republica Domincana','2017-01-01','2017-01-01')
 
 
@@ -115,13 +115,13 @@ SELECT *
 FROM active_ingredients
 
 insert into active_ingredients(description, under_insurance, insurance_coverage, created_at, updated_at)
-values('Paracetamol',0,0,'2017-01-01','2017-01-01')
+values('Paracetamol',true,0,'2017-01-01','2017-01-01')
 
 insert into active_ingredients(description, under_insurance, insurance_coverage, created_at, updated_at)
-values('Salbutamol',0,0,'2017-01-01','2017-01-01')
+values('Salbutamol',false,0,'2017-01-01','2017-01-01')
 
 insert into active_ingredients(description, under_insurance, insurance_coverage, created_at, updated_at)
-values('Amoxicilina',0,0,'2017-01-01','2017-01-01')
+values('Amoxicilina',false,0,'2017-01-01','2017-01-01')
 
 
 select *
@@ -301,8 +301,8 @@ values(0,5,3,1,'2017-01-01','2017-01-01');
 
 select * from drug_store_prices
 1 Farmacia Carol
-4 Farmacia 11
-5 Farmacia Robles
+4 Farmacia 11 (2)
+5 Farmacia Robles (3)
 select * from products
 1 Winasorb
 2 Salbutyl XD
@@ -329,20 +329,3 @@ values(0,3,4,290.00,1,'2017-01-01','2017-01-01');
 insert into drug_store_prices
 values(0,3,5,295.00,1,'2017-01-01','2017-01-01');
 
-
-Prices = Price.create([
-  { drug_store_id: '1', drug_id: '1', price: '200', location_id: '1' },
-  { drug_store_id: '1', drug_id: '2', price: '400', location_id: '2' },
-  { drug_store_id: '1', drug_id: '3', price: '500', location_id: '3' },
-  { drug_store_id: '2', drug_id: '1', price: '700', location_id: '1' },
-  { drug_store_id: '2', drug_id: '2', price: '200', location_id: '2' },
-  { drug_store_id: '2', drug_id: '3', price: '600', location_id: '3' },
-  { drug_store_id: '3', drug_id: '1', price: '100', location_id: '1' },
-  { drug_store_id: '1', drug_id: '1', price: '200', location_id: '2' },
-  { drug_store_id: '2', drug_id: '1', price: '700', location_id: '2' },
-  { drug_store_id: '3', drug_id: '1', price: '100', location_id: '2' },
-  { drug_store_id: '1', drug_id: '1', price: '200', location_id: '3' },
-  { drug_store_id: '2', drug_id: '1', price: '700', location_id: '3' },
-  { drug_store_id: '3', drug_id: '1', price: '100', location_id: '3' },
-  { drug_store_id: '3', drug_id: '2', price: '10', location_id: '2' }
-  ])
