@@ -51,7 +51,7 @@ hr {
 						</li>
 					</ul>
 					<p style="text-align: Center">
-					<%=image_tag('product/'<<@Product_show.picture_file_name, border: 0, align: "center", :height => "300", :width => "250")%></p>
+					<%=image_tag(@Product_show.picture_file_name, border: 0, align: "center", :height => "300", :width => "250")%></p>
 					
 					<% if @Product_show.receipt_required %>
 						<p style="text-align: Center">
@@ -74,7 +74,7 @@ hr {
 						<div class="row">
 						
 							<div class="large-3 columns">
-								<%=image_tag('drugstore/'<<ds.drug_store.logo_file_name, border: 0, :height => "300", :width => "200")%>
+								<%=image_tag(ds.drug_store.logo_file_name, border: 0, :height => "300", :width => "200")%>
 							</div>
 							<div class="large-9 columns" style="text-align: Left">
 								<div class="row" style="padding-button: 40px;">
@@ -94,7 +94,7 @@ hr {
 									
 										<% if (ds.drug_store.drug_ars.size == 0) or (ds.drug_store.drug_ars.nil?)%>
 											<span data-tooltip aria-haspopup="true" class="has-tip" title="No acepta seguro medico.">
-												<%=image_tag('icon/ars.png', border: 0, :height => "20", :width => "30")%>
+												<%=image_tag('iconars.png', border: 0, :height => "20", :width => "30")%>
 											</span>
 										<% else %>
 
@@ -113,12 +113,12 @@ hr {
 										
 										<% if ds.drug_store.cash_acepted %>
 										<span data-tooltip aria-haspopup="true" class="has-tip" title="Se acepta efectivo.">
-											<%=image_tag('icon/cash.png', border: 0, :height => "20", :width => "30")%>
+											<%=image_tag('iconcash.png', border: 0, :height => "20", :width => "30")%>
 										</span>
 										<% end %>
 										<% if ds.drug_store.card_acepted %>
 										<span data-tooltip aria-haspopup="true" class="has-tip" title="Se acepta tarjeta.">
-											<%=image_tag('icon/creditcard01.png', border: 0, :height => "20", :width => "30")%>
+											<%=image_tag('iconcreditcard01.png', border: 0, :height => "20", :width => "30")%>
 										</span>
 										<% end %>
 										
@@ -136,7 +136,7 @@ hr {
 												<%= f.hidden_field  :comment, value: "" %>
 												<%= f.hidden_field  :order_item_status_id, value: 1 %>
 												<%= f.hidden_field  :use_insurance, value: false %>
-												<input class="image-submit" type="image" src="/assets/Icon_cart_add03.png" style="height: 50px; width: 50px"/>
+												<input class="image-submit" type="image" src="/assets/icon_cart_add03.png" style="height: 50px; width: 50px"/>
 																					
 											<% end %>
 

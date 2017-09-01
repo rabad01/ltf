@@ -5,7 +5,7 @@
   <nav class="top-bar" data-topbar role="navigation"  style="padding-bottom: 20px; padding-top: 0px">
   <ul class="title-area">
     <li class="name" style="width: 60px; text-align: left">
-		<%= link_to image_tag("icon/Home03.png", border: 0, width: '40px'), root_path %>
+		<%= link_to image_tag("iconhome03.png", border: 0), root_path %>
     </li>
 	
     <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
@@ -39,7 +39,7 @@
       <li class="inactive">
 		
 			<%= link_to action: 'show', controller: 'order' do %>
-				<%= image_tag("icon/ActiveGreenCart.png", width: "40px") %>
+				<%= image_tag("iconactivegreencart.png", width: "40px") %>
 				<%= current_order.order_items.size%>
 			<% end %>
 		
