@@ -31,7 +31,7 @@
 							
 								<li class="title"><%=p.name %></li>
 								<li class="bullet-item">
-								<%=image_tag('prodsalbutamol100.jpg', border: 0)%>
+								<%=image_tag('product/'<<p.picture_file_name, border: 0, :height => "300", :width => "250")%>
 								</li>
 								<li class="bullet-item">
 									<ul class="small-block-grid-2 medium-block-grid-2 large-block-grid-2" style="text-align: left">  
@@ -72,3 +72,4 @@
 	  </div>	
 	</section>  
 <% end %>
+

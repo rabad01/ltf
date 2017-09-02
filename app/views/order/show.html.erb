@@ -64,7 +64,7 @@ a{color: red}
 					<li > 
 						<div class="row">
 							<div class="medium-3 columns" style="text-align: left">
-								<%=image_tag(dd.drug_store.logo_file_name, border: 0, :height => "50", :width => "50")%>
+								<%=image_tag('drugstore/'<<dd.drug_store.logo_file_name, border: 0, :height => "50", :width => "50")%>
 							</div>
 							<div class="medium-9 columns" style="text-align: left">
 								<h5><%= dd.drug_store.name %></h5>
@@ -85,7 +85,7 @@ a{color: red}
 				<% @Prod_detail.each do |pd| %>
 					<ul class="small-block-grid-1 medium-block-grid-1 large-block-grid-3">
 						<li>
-							<%=image_tag(pd.product.picture_file_name, border: 0, align: "center", :height => "300", :width => "250")%>
+							<%=image_tag('product/'<<pd.product.picture_file_name, border: 0, align: "center", :height => "300", :width => "250")%>
 							<strong><%= pd.product.name%></strong>
 							<p style="text-align: Center; font-size: 10px">
 							<%=pd.product.dosage.to_s+' '+pd.product.metric %> 
@@ -166,7 +166,7 @@ a{color: red}
 	<ul class="pricing-table" style="padding-left: 20px; padding-right: 20px; padding-top: 20px; text-align: center;">
 		<ul class="small-block-grid-2 medium-block-grid-2 large-block-grid-2" style="text-align: left">
 			<li style="width: 25%">
-			<%=image_tag('iconcloseorder.png', border: 0, align: "center", :height => "50", :width => "50")%> 
+			<%=image_tag('icon/iconcloseorder.png', border: 0, align: "center", :height => "50", :width => "50")%> 
 			</li>
 			<li style="width: 75%">
 			<h5>FINALIZAR ORDEN</h5>
@@ -188,4 +188,6 @@ a{color: red}
 </br>
   
 <% end %>
+
+
 
