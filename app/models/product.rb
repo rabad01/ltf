@@ -7,8 +7,15 @@ class Product < ApplicationRecord
   
   validates :name, presence: true
   
+#	def self.search(search)
+#		Product.joins(:active_ingredient).where("(name like ? or active_ingredients.description like ?) and products.active = true", "%#{search}%", "%#{search}%") 
+#	end
+
+	#postgress ilike
 	def self.search(search)
-		Product.joins(:active_ingredient).where("(name LIKE ? or active_ingredients.description ilike ?) and products.active = true", "%#{search}%", "%#{search}%") 
+		Product.joins(:active_ingredient).where("(name ilike ? or active_ingredients.description ilike ?) and products.active = true", "%#{search}%", "%#{search}%") 
 	end
-  
+
+
+	
 end
