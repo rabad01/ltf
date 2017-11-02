@@ -4,21 +4,41 @@
 <div class="fixed">
   <nav class="top-bar" data-topbar role="navigation"  style="padding-bottom: 20px; padding-top: 0px">
  
-  <div class="top-bar-section">
-    <ul class="left">
-		
 
-    </ul>
-  </div>
  
   <ul class="title-area">
     <li class="name" style="text-align: left">
-		<%= link_to image_tag("icon/iconhome03.png", border: 0, width: '40px'), root_path %>
+		<%= link_to image_tag("icon/logo_famard.png", border: 0, width: '100px'), root_path %>
     </li>
 	
     <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+
   </ul>
 
+  <div class="top-bar-section">
+    <ul class="left">
+	
+	<li> 	
+	<ul>
+		<li>
+			<%= form_tag({action: 'index', controller: 'product'}, :method => "get", id: "search-form") do %>
+			  <div class="row collapse">
+				<div class="large-8 small-9 columns">
+				  <%= text_field_tag :search, params[:search], placeholder: "Buscar Medicamentos..."%>
+				</div>
+				<div class="large-4 small-3 columns">
+				  <input type="submit" class="button expand" value="Buscar" style="color: white; background-color: #FF8000">
+				</div>
+			  </div>
+			<% end %>
+		  
+		</li>
+	</ul>
+	</li>		
+
+    </ul>
+  </div>  
+  
 <!--  <ul class="title-area"> -->
 <!--    <li class="name" style="text-align: left"> -->
 
@@ -30,28 +50,12 @@
   <div class="top-bar-section">
     <!-- Right Nav Section -->
     <ul class="right">
-		<li> 	
-			<ul>
-				<li>
-					<%= form_tag({action: 'index', controller: 'product'}, :method => "get", id: "search-form") do %>
-					  <div class="row collapse">
-						<div class="large-8 small-9 columns">
-						  <%= text_field_tag :search, params[:search], placeholder: "Buscar Medicamentos..."%>
-						</div>
-						<div class="large-4 small-3 columns">
-						  <input type="submit" class="button expand" value="Buscar" style="color: white; background-color: #FF8000">
-						</div>
-					  </div>
-					<% end %>
-				  
-				</li>
-			</ul>
-		</li>
+
 	  <li><hr></li>
 	  <li class="divider"></li>
       <li class="active"><a href="#">MI CUENTA</a></li>
 	  <li class="divider"></li>
-
+	  <li>
 			<%= link_to action: 'show', controller: 'order' do %>
 				<%= image_tag("icon/iconactivegreencart.png", width: "40px") %>
 				<%= current_order.order_items.size%>
